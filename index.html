@@ -26,7 +26,118 @@
 <link rel="dns-prefetch" href="//cdn.js') }}delivr.net">
 
 <style id="wp-emoji-styles-inline-css">
+/* Toàn bộ section nền */
+#message.section-message {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 80px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+/* Lớp phủ mờ */
+#message .uk-overlay-primary {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Container chính */
+.message-container {
+    max-width: 500px;
+    margin: 0 auto;
+    z-index: 2;
+    position: relative;
+    color: white;
+}
+
+/* Khối form với nền mờ */
+.blur-bg {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Tiêu đề form */
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Input group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Nhãn */
+.input-group label {
+    font-size: 14px;
+    color: white;
+}
+
+/* Input */
+.input-group input.input {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid white;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input.input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.input-group input.input:focus {
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Nút gửi */
+button.send_message {
+    width: 100%;
+    background-color: black;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.send_message:hover {
+    background-color: #333;
+}
+
+/* Link xem lời chúc */
+.message-container a {
+    display: block;
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+    margin-top: 15px;
+}
+
+  img.wp-smiley, img.emoji {
+    display: inline !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 1em !important;
+    width: 1em !important;
+    margin: 0 0.07em !important;
+    vertical-align: -0.1em !important;
+    background: none !important;
+    padding: 0 !important;
+  }
 	img.wp-smiley, img.emoji {
 		display: inline !important;
 		border: none !important;
@@ -726,7 +837,67 @@ background-color: var(--body-bg) !important;
   <!-- END WEDDING TIMELINE -->
   
     <!-- MESSEGER -->
-  
+    <section id="message" class="section-message uk-background-cover uk-section" style="background-image:url(images/cFTtQXWzBEK0qzuuAZp0QZRCliL6SoDcLjmCedxf.jpg); display:block">
+        <div class="uk-position-cover uk-overlay uk-overlay-primary" style="opacity:.5"> </div>
+        <div class="message-container container uk-position-relative uk-position-z-index">
+            <h2 class="section-title uk-light" style="color:white">
+                 </h2>
+            <div class="list_message">
+              
+            </div>
+
+            <div class="uk-padding-small uk-border-rounded blur-bg" style="border:1px solid white">
+
+                <h3 class="form-title" style="color:white">Gửi lời chúc đến cặp đôi</h3>
+                <form action="" id="customForm">
+                    <div class="input-group uk-margin-top" style="color:white;">
+                        <label for="">
+                            Tên của bạn </label>
+                        <input style="border:1px solid white;border-radius: 10px !important;" id="name" type="text" class="input blur-bg" value="" required="">
+                    </div>
+                    <div class="input-group uk-margin-top">
+                        <label for="" style="color:white">
+                            Lời chúc </label>
+                            <input style="border:1px solid white;border-radius: 10px !important;" type="text" id="messages" class="input blur-bg" required="">
+                            <label for="" style="color:white">
+                                Xác nhận tham dự </label>
+                                <input style="border:1px solid white;border-radius: 10px !important;" type="text" id="accept" class="input blur-bg" required="">
+                    </div>
+                    <button type="submit" class="btn btn-primary send_message uk-margin-top" style="color:white">Gửi
+                        lời chúc</button>
+                </form>
+                <p style="margin-top:10px;" id="status"></p>
+                <a href="https://docs.google.com/spreadsheets/d/1yqS0XTTekHQN3NHpX3JGuG7Y6uF26HPPSG-q7jGImE4/edit?usp=sharing" style="color:white">Xem lời chúc</a>
+            </div>
+
+            <script>
+                document.getElementById("customForm").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    let name = document.getElementById("name").value;
+                    let message = document.getElementById("messages").value;
+                    let accept = document.getElementById("accept").value;         
+                    // Thay thế bằng URL Google Form của bạn
+                    let googleFormURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc3Xooi6c5xB8r_UQeDhF2M_JvrbSFZa7iid7atK92Dtr8mtA/formResponse";
+                    // Các entry ID (tìm trong Google Form)
+                    let formData = new FormData();
+                    formData.append("entry.873758701", name); 
+                    formData.append("entry.454536210", message); 
+                    formData.append("entry.116443091", accept);
+        
+                    fetch(googleFormURL, {
+                        method: "POST",
+                        body: formData,
+                        mode: "no-cors"
+                    }).then(() => {
+                        document.getElementById("status").innerText = "Gửi thành công!";
+                        document.getElementById("customForm").reset();
+                    }).catch(error => {
+                        document.getElementById("status").innerText = "Có lỗi xảy ra!";
+                    });
+                });
+            </script>
+        </div>
+    </section>
   <!-- END MESSEGER -->
   
   <!-- GIFT -->
@@ -766,7 +937,7 @@ background-color: var(--body-bg) !important;
 
   
   <!-- THANKYOU -->
-  <section id="thankyou" class="thankyou uk-position-relative bg-black" uk-height-viewport="">
+  <section id="thankyou" class="thankyou uk-position-relative bg-black" uk-height-viewport="" style="margin-top:100px;">
     <div class="uk-position-cover uk-cover-container" style="opacity:.2">
       <img src="images/ZA7gZPuMteuJzdtHl2NPTAGbrhTxgaxDbUNhN4Ft.jpg" alt="" uk-cover="" class="uk-blend-multiply">
     </div>
